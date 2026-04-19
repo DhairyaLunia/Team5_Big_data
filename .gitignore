@@ -1,0 +1,11 @@
+*.csv
+*.json
+*.tar
+*.zip
+*.parquet
+__pycache__
+.env
+*.pyc
+.DS_Store
+checkpoint/
+delta_log/

@@ -1,0 +1,14 @@
+gensim
+nltk
+vaderSentiment
+scipy
+scikit-learn
+pandas
+numpy
+pyspark
+sentence-transformers
+faiss-cpu
+langchain
+openai
+streamlit
+mlflow
