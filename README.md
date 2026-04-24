@@ -1,4 +1,4 @@
-# SentimenTrip
+# PersonaPath
 
 Context-Aware Travel & Dining Recommendation Engine using RAG & Behavioral Personas. Built on Yelp Open Dataset (6.9M reviews).
 
@@ -10,7 +10,10 @@ Context-Aware Travel & Dining Recommendation Engine using RAG & Behavioral Perso
 | Fu Lee (Lear) | 02_topic_modeling |
 | Saloni Jain | 03_feature_engineering |
 | Hsin Kuei Chang (Quinten) | 04_recommender_rag |
-| Esther Baumgartner | 05_interface |
+| Dhairya Lunia | 05_Dashboard |
+| Saloni Jain, Fue Lee (Lear) & Dhairya Lunia | 06_interface |
+| Esther Baumgartner | 07_Slides |
+| Esther Baumgartner | 08_Flyer |
 
 ## Pipeline Overview
 
