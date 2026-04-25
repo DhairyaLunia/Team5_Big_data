@@ -1,44 +1,44 @@
-# Instructions
+# Setup & Execution Instructions
 
-## Prerequisites
+Follow these steps to set up the PersonaPath pipeline and run the recommendation engine. All scripts and notebooks are located in the `notebooks/` directory.
 
-- Databricks Community Edition account
-- Yelp Open Dataset downloaded
-- Python 3.10+
+## 📋 Prerequisites
 
-## Installation
+*   **Databricks Account:** Community Edition or Professional.
+*   **Python:** 3.9+
+*   **Databricks Catalog:** All tables are stored in `msbabigdata.default`.
+*   **Required Python Packages:**
+    ```bash
+    pip install gensim nltk vaderSentiment pyspark faiss-cpu streamlit
+    ```
 
-```bash
-pip install gensim nltk vaderSentiment sentence-transformers faiss-cpu langchain openai streamlit scipy
-```
+## 🚀 Step-by-Step Setup (All in `notebooks/`)
 
-## How to Run Each Stage
+### 1. Data Ingestion
+Begin by running the ETL process to filter the Philadelphia subset from the Yelp Open Dataset.
+*   **Script:** `notebooks/01_data_processing.ipynb`
 
-### 1. Data Processing
-- Run `01_data_processing/dhairya_etl.ipynb` in Databricks.
-- **Expected Output:** `merged_philly` and `businesses_filtered` temp views.
-
-### 2. Topic Modeling
-- Run `02_topic_modeling/lear_lda_topics.ipynb` in Databricks.
-- **Expected Output:** `lda_topic_results` table with topic distributions per review.
+### 2. Behavioral Modeling (LDA Pipeline)
+**[IMPORTANT]** Run this notebook first to generate the 25 topic vectors.
+*   **Script:** `notebooks/02_lda_topic_modeling.ipynb`
+*   **Tasks:** Data loading, preprocessing (cuisine word removal), LDA training, and topic labeling.
 
 ### 3. Feature Engineering
-- Run `03_feature_engineering/saloni_feature_engineering.ipynb` in Databricks.
-- **Expected Output:** `business_profiles` and `user_personas` tables.
+**[IMPORTANT]** Run this notebook second to build the final profiles.
+*   **Script:** `notebooks/03_feature_engineering.ipynb`
+*   **Tasks:** Generates business profiles (intent scores, sentiment, EAS) and user personas.
 
-### 4. Recommender RAG
-- Run `04_recommender_rag/quinten_faiss_langchain.ipynb` locally or in Databricks.
-- **Expected Output:** FAISS index built from `business_profiles`.
+### 4. Vector Similarity & RAG
+Build the FAISS index and set up the retrieval pipeline.
+*   **Script:** `notebooks/04_recommender_rag.ipynb`
 
-### 5. Interface
-- Run `streamlit run 05_interface/app.py` locally.
-- **Expected Output:** Streamlit web application running on `localhost`.
+### 5. Streamlit UI
+To launch the interactive demo:
+```bash
+streamlit run notebooks/05_streamlit_interface.py
+```
 
-## Data Flow
-- **Data Processing:** Takes raw Yelp JSON -> Outputs filtered views.
-- **Topic Modeling:** Takes filtered reviews -> Outputs review-topic associations.
-- **Feature Engineering:** Takes topics, businesses, users -> Outputs business and user profiles.
-- **Recommender:** Takes business profiles + user prompt -> Outputs recommendations.
-- **Interface:** Takes recommended businesses + RAG response -> Outputs user-facing recommendations.
-
-Note: No large data files are stored in this repository. All data operations utilize Databricks FileStore.
+## 🛠️ Important Notes
+*   **Catalog Paths:** Ensure your Databricks environment points to `msbabigdata.default`.
+*   **Clean Saves:** All Delta tables use `overwriteSchema=True`.
+*   **Cuisine Filtering:** Cuisine words are removed during LDA training to prevent signal duplication.
