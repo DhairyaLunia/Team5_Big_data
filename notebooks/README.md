@@ -12,21 +12,127 @@ This directory contains the complete PersonaPath analytics pipeline, including d
 
 ---
 
-Prerequisites
+# 🍽️ PersonaPath
+### AI-Powered Dining Recommendations — Philadelphia
 
-Python 3.9+
-OpenAI API key
-Google Places API key
+> *Culinary curation built on user personas, topic-modeled restaurant profiles, and live enrichment via Google Places.*
 
-Setup
-bashpip install streamlit pandas numpy scikit-learn openai requests plotly pydeck scipy
-Open big_data.py and fill in your credentials near the top:
-pythonOPENAI_API_KEY    = "sk-..."
-GOOGLE_PLACES_KEY = "AIza..."
-Also update the two hardcoded data paths in load_data() to point to your local CSV files:
-pythonb_path = "/path/to/business_profiles.csv"
-u_path = "/path/to/user_personas.csv"
-Run
-bashstreamlit run big_data.py
+---
 
-Note: The app expects two CSVs — business_profiles.csv and user_personas.csv — with the topic score columns and fields referenced in the code. If you're sharing those datasets publicly, add them to the repo and update the paths to relative ones (e.g. "data/business_profiles.csv"), which will make the setup one step simpler for anyone cloning it.
+## ✦ What It Does
+
+PersonaPath matches users to restaurants using a multi-layer recommendation engine:
+
+- **Jensen-Shannon Divergence** similarity between user taste vectors and business profiles
+- **Intent boosting** — detects mood signals in natural language (romantic, group, solo, hidden gems, etc.)
+- **MMR reranking** — balances relevance with diversity across results
+- **Live Google Places enrichment** — open/closed status, photos, reviews, phone, website
+- **GPT-4o-mini briefing** — a concise AI-written rationale for each result set
+- **Chat interface** — refine results conversationally after the initial recommendation
+
+---
+
+## 🚀 Quickstart
+
+### 1. Install dependencies
+
+```bash
+pip install streamlit pandas numpy scikit-learn scipy openai requests plotly pydeck
+```
+
+### 2. Add your API keys
+
+Open `big_data.py` and replace the placeholders near the top:
+
+```python
+OPENAI_API_KEY    = "sk-..."        # OpenAI (GPT-4o-mini for briefings)
+GOOGLE_PLACES_KEY = "AIza..."       # Google Places API (enrichment + map pins)
+```
+
+> Both keys are optional — the core recommendation engine runs without them. Without OpenAI you lose AI briefings; without Google Places you lose live photos, hours, and map coordinates.
+
+### 3. Point to your data
+
+Update the file paths in `load_data()`:
+
+```python
+b_path = "data/business_profiles.csv"
+u_path = "data/user_personas.csv"
+```
+
+### 4. Run
+
+```bash
+streamlit run big_data.py
+```
+
+---
+
+## 📁 Data Requirements
+
+The app expects two CSVs placed in a `data/` folder (or wherever you point `load_data()`):
+
+| File | Key Columns |
+|---|---|
+| `business_profiles.csv` | `business_name`, `business_stars`, `categories`, `overall_sentiment`, `dominant_topic`, 25 topic score columns, `hours_monday` … `hours_sunday`, intent scores |
+| `user_personas.csv` | `user_id`, `top_taste_1/2/3`, same 25 topic score columns |
+
+The 25 topic columns are listed in `TOPIC_COLS` at the top of `big_data.py`.
+
+---
+
+## 🧠 How the Scoring Works
+
+```
+final_score = α × JSD_similarity + β × intent_boost + (1−α−β) × sentiment_norm
+```
+
+| Weight | Component | Default |
+|---|---|---|
+| α | User–restaurant topic similarity (JSD) | 0.50 |
+| β | Query intent boost (romantic, group, etc.) | 0.30 |
+| 1−α−β | Ensemble Adjusted Sentiment (EAS) | 0.20 |
+
+Results are reranked with **MMR** (λ=0.65) to prevent similar restaurants from dominating the top 10.
+
+---
+
+## 🖥️ Interface Overview
+
+| Panel | Description |
+|---|---|
+| Sidebar | Persona selector, mood query, Surprise Me toggle, result count |
+| Recommendations tab | Map view + ranked restaurant cards with AI reasoning |
+| Flavor Landscape tab | Radar chart of the user's top 8 taste dimensions |
+| Export tab | Full result table + CSV download |
+| Chat input | Follow-up questions answered in context of current results |
+
+---
+
+## ⚙️ Configuration
+
+| Constant | Location | Purpose |
+|---|---|---|
+| `ALPHA`, `BETA` | Top of `big_data.py` | Scoring weights |
+| `TOPIC_COLS` | Top of `big_data.py` | The 25 taste dimensions |
+| `FEEDBACK_FILE` | Top of `big_data.py` | Path for thumbs up/down logging |
+| `FOOD_IMAGES` | Top of `big_data.py` | Fallback images when Google Photos unavailable |
+
+---
+
+## 📦 Tech Stack
+
+| Layer | Library |
+|---|---|
+| UI | Streamlit |
+| ML | scikit-learn, scipy, numpy |
+| Data | pandas |
+| Visualisation | Plotly, pydeck |
+| AI Briefings | OpenAI GPT-4o-mini |
+| Enrichment | Google Places API |
+
+---
+
+## 📝 License
+
+MIT — use freely, attribution appreciated.
