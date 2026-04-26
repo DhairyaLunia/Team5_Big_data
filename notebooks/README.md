@@ -34,7 +34,7 @@ PersonaPath matches users to restaurants using a multi-layer recommendation engi
 
 ## 🚀 Quickstart
 
-05_streamlit_interface.py is the final, self-contained interface — just run it.
+*05_streamlit_interface.py* is the final, self-contained interface — just run it.
 
 ### 1. Install dependencies
 
