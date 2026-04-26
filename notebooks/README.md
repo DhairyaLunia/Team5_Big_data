@@ -12,7 +12,21 @@ This directory contains the complete PersonaPath analytics pipeline, including d
 
 ---
 
-### Key Technical Decisions
-*   **Centralized Scripts:** All core logic is centralized here for easy version control and execution.
-*   **Cuisine Word Removal:** 99 cuisine words removed from LDA to prevent signal duplication.
-*   **Delta Lake Compatibility:** Cleaned column names for Delta table integration.
+Prerequisites
+
+Python 3.9+
+OpenAI API key
+Google Places API key
+
+Setup
+bashpip install streamlit pandas numpy scikit-learn openai requests plotly pydeck scipy
+Open big_data.py and fill in your credentials near the top:
+pythonOPENAI_API_KEY    = "sk-..."
+GOOGLE_PLACES_KEY = "AIza..."
+Also update the two hardcoded data paths in load_data() to point to your local CSV files:
+pythonb_path = "/path/to/business_profiles.csv"
+u_path = "/path/to/user_personas.csv"
+Run
+bashstreamlit run big_data.py
+
+Note: The app expects two CSVs — business_profiles.csv and user_personas.csv — with the topic score columns and fields referenced in the code. If you're sharing those datasets publicly, add them to the repo and update the paths to relative ones (e.g. "data/business_profiles.csv"), which will make the setup one step simpler for anyone cloning it.
