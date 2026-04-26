@@ -126,6 +126,4 @@ Results are reranked with **MMR** (λ=0.65) to prevent similar restaurants from 
 
 ---
 
-## 📝 License
 
-MIT — use freely, attribution appreciated.
