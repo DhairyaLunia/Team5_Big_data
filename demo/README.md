@@ -31,4 +31,4 @@ Instead of just a list, our **LLM Concierge** generates a reason:
 
 ### 📂 Demo Assets
 *   **Presentation Deck:** [Link to PDF/PPT here]
-*   **Engine Walkthrough Video:** [Link to Demo Video here]
+*   **Engine Walkthrough Video:** `PersonaPath_Demo.mp4`
