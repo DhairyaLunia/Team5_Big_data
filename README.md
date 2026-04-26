@@ -35,7 +35,7 @@ To prevent the engine from simply matching cuisine types (which is already handl
 We developed the **Entropy-Adjusted Sentiment (EAS)** score to solve the "generic rating" problem. By multiplying sentiment with the inverse of topic entropy, we identify businesses that are not just highly rated, but **consistently great at their core persona**.
 
 ### 3. Distributed Scale
-Processing 6.9 million reviews across thousands of users required a distributed approach. Using **Apache Spark on Databricks**, we implemented a high-performance pipeline that persists data in **Delta Lake** for schema reliability and rapid retrieval.
+Processing 6.9 million reviews across thousands of users required a distributed approach. Using **Apache Spark on Databricks**, we implemented a high performance pipeline that persists data in **Delta Lake** for schema reliability and rapid retrieval.
 
 ---
 
