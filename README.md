@@ -4,14 +4,14 @@
 [![PersonaPath](https://img.shields.io/badge/PersonaPath-v1.0-blue?style=for-the-badge&logo=openai)](https://github.com/DhairyaLunia/Team5_Big_data)
 [![Apache Spark](https://img.shields.io/badge/Distributed_Processing-Apache_Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)](https://spark.apache.org/)
 [![Gensim](https://img.shields.io/badge/Behavioral_Modeling-Gensim_LDA-blue?style=for-the-badge)](https://radimrehurek.com/gensim/)
-[![FAISS](https://img.shields.io/badge/Vector_Search-FAISS-0433FF?style=for-the-badge&logo=facebook&logoColor=white)](https://github.com/facebookresearch/faiss)
+<span style="background-color:#fff3cd">[![JSD](https://img.shields.io/badge/Vector_Similarity-Jensen--Shannon_Divergence-0433FF?style=for-the-badge)](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.jensenshannon.html)</span>
 
 ---
 
 ## 🌟 Executive Summary
 Traditional recommendation platforms (like Yelp or Google Maps) answer the question: *"What is nearby?"* **PersonaPath** answers the question: *"Who am I, and where should I go?"*
 
-Built by **Team 5 at the Carlson School of Management (MSBA)**, PersonaPath is a sophisticated recommendation engine that leverages 6.9 million Yelp reviews to build deep behavioral profiles. By combining **LDA Topic Modeling**, **VADER Sentiment Analysis**, and **FAISS-powered Vector Search**, we deliver personalized dining matches with natural language justifications.
+Built by **Team 5 at the Carlson School of Management (MSBA)**, PersonaPath is a sophisticated recommendation engine that leverages 6.9 million Yelp reviews to build deep behavioral profiles. By combining **LDA Topic Modeling**, **VADER Sentiment Analysis**, and **Jensen-Shannon Divergence (JSD) Vector Similarity Search**, we deliver personalized dining matches with natural language justifications.
 
 ---
 
@@ -23,7 +23,7 @@ Our recommendation logic is built on a proprietary four-layer weighted scoring s
 | **Layer 1** | **Behavioral DNA** | **0.50** | 25-dimensional topic vectors calculated per business and user using LDA. Matches users with the "vibe" of a restaurant. |
 | **Layer 2** | **Query Intent Boost** | **0.30** | Dynamic intent scoring for 5 personas: *Romantic, Solo Work, Family, Group, Hidden Gem*. |
 | **Layer 3** | **EAS Quality Score** | **0.20** | `Sentiment × (1 - Topic Entropy) × Log(Review Count)`. Penalizes inconsistency and rewards established excellence. |
-| **Layer 4** | **LLM Concierge** | **N/A** | RAG pipeline using FAISS retrieval and GPT-4o to generate natural language explanations for every recommendation. |
+| **Layer 4** | **LLM Concierge** | **N/A** | GPT-4o-mini explanation layer — JSD-ranked restaurant metadata is passed as structured context to generate personalized natural language justifications for every recommendation.</span> |
 
 ---
 
@@ -34,15 +34,18 @@ To prevent the engine from simply matching cuisine types (which is already handl
 ### 2. The EAS Quality Metric
 We developed the **Entropy-Adjusted Sentiment (EAS)** score to solve the "generic rating" problem. By multiplying sentiment with the inverse of topic entropy, we identify businesses that are not just highly rated, but **consistently great at their core persona**.
 
-### 3. Distributed Scale
+### 3. Jensen-Shannon Divergence (JSD) Similarity</span>
+Rather than approximate nearest-neighbor search, we use **Jensen-Shannon Divergence** to measure the distributional distance between user and business topic vectors. JSD is well-suited for probability distributions like our LDA topic outputs, providing a more behaviorally grounded similarity score than cosine or Euclidean distance.
+
+### 4. Distributed Scale
 Processing 6.9 million reviews across thousands of users required a distributed approach. Using **Apache Spark on Databricks**, we implemented a high performance pipeline that persists data in **Delta Lake** for schema reliability and rapid retrieval.
 
 ---
 
 ## 👥 The Team
 *   **Saloni Jain:** Lead for LDA Behavioral Modeling and Feature Engineering.
-*   **Quinten:** Architect of the RAG Pipeline and FAISS Vector Similarity search.
-*   **Dhairya:** Lead for Model Optimization, LLM Integration, data processing, RAG pipeline to Streamlit Dashboard Development.
+*   **Quinten:** Lead for Recommender System Design, JSD Similarity Scoring, and LLM Explanation Pipeline.
+*   **Dhairya:** Lead for Model Optimization, LLM Integration, data processing, LLM Explanation Pipeline to Streamlit Dashboard Development.
 *   **Esther:** Lead for PersonaPath Flier, Interface and Presentation.
 *   **Lear:** Lead for LDA Data Pipeline orchestration and Presentation Strategy.
 
