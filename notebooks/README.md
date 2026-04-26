@@ -7,8 +7,7 @@ This directory contains the complete PersonaPath analytics pipeline, including d
 | **`01_data_processing.ipynb`** | **The Filter:** Cleans the raw Yelp data to extract the Philadelphia subset. |
 | **`02_lda_topic_modeling.ipynb`** | **The Brain:** Trains the 25-topic behavioral model (removes 99 cuisine words). |
 | **`03_feature_engineering.ipynb`** | **The Profiler:** Creates "Taste DNA" profiles for restaurants and users. |
-| **`04_recommender_rag.ipynb`** | **The Oracle:** Handles vector search and natural language explanations. |
-| **`05_streamlit_interface.py`** | **The Window:** The interactive Streamlit dashboard for the end-user. |
+| **`04_recommender_rag_and_interface.ipynb`** | **The Oracle:** Handles vector search and natural language explanations and **The Window:** The interactive Streamlit dashboard for the end-user. |
 
 ---
 
