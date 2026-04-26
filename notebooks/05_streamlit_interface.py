@@ -191,8 +191,8 @@ div[data-testid="stChatInput"] > div { background-color: #ffffff !important; bor
 </style>
 """, unsafe_allow_html=True)
 
-OPENAI_API_KEY    = "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"
-GOOGLE_PLACES_KEY = "AIzaSyCE-zOCpqmkB7FbOp3gf_esNBCOwkpVKjM"
+OPENAI_API_KEY    = "ENTER"
+GOOGLE_PLACES_KEY = "ENTER"
 FEEDBACK_FILE     = "feedback.csv"
 
 TOPIC_COLS = [
