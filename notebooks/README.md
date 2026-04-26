@@ -12,15 +12,6 @@ This directory contains the complete PersonaPath analytics pipeline, including d
 
 ---
 
-# 🍽️ PersonaPath
-### AI-Powered Dining Recommendations — Philadelphia
-
-> *Culinary curation built on user personas, topic-modeled restaurant profiles, and live enrichment via Google Places.*
-
----
-
-## ✦ What It Does
-
 PersonaPath matches users to restaurants using a multi-layer recommendation engine:
 
 - **Jensen-Shannon Divergence** similarity between user taste vectors and business profiles
