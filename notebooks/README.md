@@ -42,7 +42,7 @@ OPENAI_API_KEY    = "sk-..."        # OpenAI (GPT-4o-mini for briefings)
 GOOGLE_PLACES_KEY = "AIza..."       # Google Places API (enrichment + map pins)
 ```
 
-> Both keys are optional — the core recommendation engine runs without them. Without OpenAI you lose AI briefings; without Google Places you lose live photos, hours, and map coordinates.
+> Both keys are important — the core recommendation engine runs with them. Without OpenAI you lose AI briefings; without Google Places you lose live photos, hours, and map coordinates.
 
 ### 3. Point to your data
 
