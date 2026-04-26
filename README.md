@@ -1,66 +1,66 @@
 # PersonaPath: Personalized Travel & Dining Recommendation Engine
+### *Beyond Proximity: A Behavioral-Driven Discovery Engine for the Modern Diner*
 
-![PersonaPath Logo](https://img.shields.io/badge/PersonaPath-Project-blue?style=for-the-badge&logo=openai)
-![Apache Spark](https://img.shields.io/badge/Apache_Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)
-![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=for-the-badge&logo=databricks&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
-
-PersonaPath is a state-of-the-art personalized restaurant recommendation system for Philadelphia that leverages **Retrieval Augmented Generation (RAG)** and **behavioral profiling** on 6.9 million Yelp reviews.
-
-## 🚀 Overview
-
-Traditional recommendation platforms tell you **WHAT** is nearby (distance, rating, price). PersonaPath tells you **WHO** you are and matches you with dining experiences that fit your specific persona—delivering recommendations with natural language explanations.
-
-## 🏗️ System Architecture (4-Layer Engine)
-
-Our recommendation engine operates across four sophisticated layers:
-
-1.  **Layer 1 — Behavioral Persona (0.5 weight):** 25-dimensional topic vectors calculated using LDA for every business and user.
-2.  **Layer 2 — Query Intent Boost (0.3 weight):** Real-time intent scoring across 5 categories (*romantic, solo work, family, group, hidden gem*) plus hard filters for cuisine.
-3.  **Layer 3 — EAS Quality Score (0.2 weight):** A custom quality metric: `Sentiment × (1 - Topic Entropy) × Log(Review Count)`.
-4.  **Layer 4 — LLM Concierge:** Generates natural language justifications for each recommendation based on the user's specific "Taste DNA."
-
-## 🛠️ Tech Stack
-
-*   **Distributed Processing:** Apache Spark on Databricks
-*   **Behavioral Modeling:** Gensim LDA (25-topic model)
-*   **Sentiment Analysis:** VADER Sentiment Analysis
-*   **Vector Search:** FAISS (Facebook AI Similarity Search)
-*   **Data Lake:** Delta Lake (with schema evolution)
-*   **Languages/Tools:** Python, PySpark, Streamlit, NLTK
-*   **Dataset:** Yelp Open Dataset (Philadelphia Subset: 1,962 restaurants, 20,017 users, 261K reviews)
-
-## 👥 Team 5 Members & Roles
-
-| Name | Role |
-| :--- | :--- |
-| **Saloni Jain** | LDA Topic Modeling + Feature Engineering |
-| **Quinten** | RAG Pipeline + FAISS Vector Search |
-| **Dhairya** | Model Support |
-| **Esther** | Streamlit UI + Project Flyer |
-| **Lear** | Deck + LDA Data Pipeline |
-
-## 📊 Results Summary
-
-*   **1,962** Businesses profiled with rich metadata and intent scores.
-*   **20,017** Unique user personas built from historical behavioral data.
-*   **25** Distinct behavioral topics discovered (e.g., "Fine Dining Excellence," "Casual Brunch Vibes").
-
-## 🔗 Project Links
-
-*   **Dataset:** [Yelp Open Dataset](https://www.yelp.com/dataset)
-*   **Demo:** [PersonaPath Streamlit App](https://github.com/DhairyaLunia/Team5_Big_data.git)
-*   **Documentation:** [Project Flyer & Deck](./flier/)
+[![PersonaPath](https://img.shields.io/badge/PersonaPath-v1.0-blue?style=for-the-badge&logo=openai)](https://github.com/DhairyaLunia/Team5_Big_data)
+[![Apache Spark](https://img.shields.io/badge/Distributed_Processing-Apache_Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)](https://spark.apache.org/)
+[![Gensim](https://img.shields.io/badge/Behavioral_Modeling-Gensim_LDA-blue?style=for-the-badge)](https://radimrehurek.com/gensim/)
+[![FAISS](https://img.shields.io/badge/Vector_Search-FAISS-0433FF?style=for-the-badge&logo=facebook&logoColor=white)](https://github.com/facebookresearch/faiss)
 
 ---
 
-## ⚡ Quick Start
+## 🌟 Executive Summary
+Traditional recommendation platforms (like Yelp or Google Maps) answer the question: *"What is nearby?"* **PersonaPath** answers the question: *"Who am I, and where should I go?"*
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/DhairyaLunia/Team5_Big_data.git
-    ```
-2.  **Review Instructions:** See [INSTRUCTIONS.md](INSTRUCTIONS.md) for environment setup and notebook execution order.
+Built by **Team 5 at the Carlson School of Management (MSBA)**, PersonaPath is a sophisticated recommendation engine that leverages 6.9 million Yelp reviews to build deep behavioral profiles. By combining **LDA Topic Modeling**, **VADER Sentiment Analysis**, and **FAISS-powered Vector Search**, we deliver personalized dining matches with natural language justifications.
+
+---
+
+## 🏗️ The PersonaPath Engine: 4-Layer Architecture
+Our recommendation logic is built on a proprietary four-layer weighted scoring system that balances historical behavior, current intent, and absolute quality.
+
+| Layer | Component | Weight | Logic |
+| :--- | :--- | :--- | :--- |
+| **Layer 1** | **Behavioral DNA** | **0.50** | 25-dimensional topic vectors calculated per business and user using LDA. Matches users with the "vibe" of a restaurant. |
+| **Layer 2** | **Query Intent Boost** | **0.30** | Dynamic intent scoring for 5 personas: *Romantic, Solo Work, Family, Group, Hidden Gem*. |
+| **Layer 3** | **EAS Quality Score** | **0.20** | `Sentiment × (1 - Topic Entropy) × Log(Review Count)`. Penalizes inconsistency and rewards established excellence. |
+| **Layer 4** | **LLM Concierge** | **N/A** | RAG pipeline using FAISS retrieval and GPT-4o to generate natural language explanations for every recommendation. |
+
+---
+
+## 🔬 Key Technical Innovations
+### 1. Behavioral Isolation (The "Cuisine-Blind" LDA)
+To prevent the engine from simply matching cuisine types (which is already handled by categorical filters), we surgically removed **99 cuisine-specific words** (e.g., *sushi, taco, pizza*) from the LDA corpus. This forced the model to learn **behaviors** (e.g., *attentive service, quiet atmosphere, efficient takeout*) rather than just food categories.
+
+### 2. The EAS Quality Metric
+We developed the **Entropy-Adjusted Sentiment (EAS)** score to solve the "generic rating" problem. By multiplying sentiment with the inverse of topic entropy, we identify businesses that are not just highly rated, but **consistently great at their core persona**.
+
+### 3. Distributed Scale
+Processing 6.9 million reviews across thousands of users required a distributed approach. Using **Apache Spark on Databricks**, we implemented a high-performance pipeline that persists data in **Delta Lake** for schema reliability and rapid retrieval.
+
+---
+
+## 👥 The Team
+*   **Saloni Jain:** Lead for LDA Behavioral Modeling and Feature Engineering.
+*   **Quinten:** Architect of the RAG Pipeline and FAISS Vector Similarity search.
+*   **Dhairya:** Model Optimization and technical support.
+*   **Esther:** Designer of the Streamlit Interface and the PersonaPath Flier.
+*   **Lear:** Presentation Strategy and LDA Data Pipeline orchestration.
+
+---
+
+## 📊 Project Impact (Philadelphia Subset)
+*   **1,962** Restaurants profiled across 48 behavioral and intent features.
+*   **20,017** Unique User Personas built from historical dining patterns.
+*   **261,000** High-quality reviews analyzed for sentiment and topic distribution.
+
+---
+
+## 🔗 Resources & Navigation
+*   🚀 **[Quick Start Guide](INSTRUCTIONS.md)** - How to run the pipeline.
+*   📓 **[Notebooks Directory](./notebooks/)** - All 5 core scripts (Data Processing to Interface).
+*   📁 **[Demo Walkthrough](./demo/)** - See the engine and walkthrough video in action.
+*   📄 **[Project Flyer](./flier/Team5_PersonaPath_Flier.pdf)** - Executive summary PDF.
+*   📚 **[Bibliography](./BIBLIOGRAPHY.md)** - Data and library credits.
 
 ---
 
