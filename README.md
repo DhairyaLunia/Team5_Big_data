@@ -42,9 +42,9 @@ Processing 6.9 million reviews across thousands of users required a distributed 
 ## 👥 The Team
 *   **Saloni Jain:** Lead for LDA Behavioral Modeling and Feature Engineering.
 *   **Quinten:** Architect of the RAG Pipeline and FAISS Vector Similarity search.
-*   **Dhairya:** Model Optimization and technical support.
-*   **Esther:** Designer of the Streamlit Interface and the PersonaPath Flier.
-*   **Lear:** Presentation Strategy and LDA Data Pipeline orchestration.
+*   **Dhairya:** Lead for Model Optimization, LLM Integration, RAG pipeline to Streamlit Dashboard Development.
+*   **Esther:** Lead for PersonaPath Flier and Presentation.
+*   **Lear:** Lead for LDA Data Pipeline orchestration and Presentation Strategy.
 
 ---
 
