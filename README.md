@@ -46,8 +46,8 @@ Processing 6.9 million reviews across thousands of users required a distributed 
 *   **Saloni Jain:** Lead for LDA Behavioral Modeling and Feature Engineering.
 *   **Quinten:** Lead for Recommender System Design, JSD Similarity Scoring, and LLM Explanation Pipeline.
 *   **Dhairya:** Lead for Model Optimization, LLM Integration, data processing, LLM Explanation Pipeline to Streamlit Dashboard Development.
-*   **Esther:** Lead for PersonaPath Flier, Interface and Presentation.
-*   **Lear:** Lead for LDA Data Pipeline orchestration and Presentation Strategy.
+*   **Esther:** Lead for PersonaPath Flier and Presentation.
+*   **Lear:** Lead for LDA Data Pipeline orchestration, Streamlit Dashboard Interface Design and Presentation Deck & Strategy.
 
 ---
 
